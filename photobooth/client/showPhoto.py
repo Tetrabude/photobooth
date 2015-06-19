@@ -9,7 +9,7 @@ from PIL import ImageTk, Image
 
 root = Tk()
 root.title("Arthur rennt durchs Bild")
-root.overrideredirect(True)
+#root.overrideredirect(True)
 
 w, h = root.winfo_screenwidth(), root.winfo_screenheight()
 root.geometry("%dx%d+0+0" % (w, h))
