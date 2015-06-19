@@ -26,6 +26,7 @@ class FullScreenApp(object):
 
 root = Tk()
 root.title("Arthur rennt durchs Bild")
+root.overrideredirect(1)
 img = ImageTk.PhotoImage(Image.open("test-kl.jpg"))
 panel = Label(root, image = img)
 panel.pack(side = "bottom", fill = "both", expand = "yes")
