@@ -5,7 +5,7 @@ import subprocess
 import sys
 
 import gphoto2 as gp
-import photobooth.client.showPhoto as showPhoto
+import showPhoto
 
 def main():
     context = gp.gp_context_new()
