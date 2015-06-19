@@ -7,22 +7,23 @@ Created on 19.06.2015
 from tkinter import *
 from PIL import ImageTk, Image
 
-root = Tk()
-root.title("Arthur rennt durchs Bild")
-#root.overrideredirect(True)
+def showPhoto(path):
 
-w, h = root.winfo_screenwidth(), root.winfo_screenheight()
-root.geometry("%dx%d+0+0" % (w, h))
+    
+    root = Tk()
+    #root.overrideredirect(True)
 
-originalImg = Image.open("test.jpg")
-resizedImg = originalImg.resize((w, h),Image.ANTIALIAS)
-img = ImageTk.PhotoImage(resizedImg)
+    w, h = root.winfo_screenwidth(), root.winfo_screenheight()
+    root.geometry("%dx%d+0+0" % (w, h))
 
-panel = Label(root, image = img)
-panel.pack(side = "bottom", fill = "both", expand = "yes")
+    originalImg = Image.open(path)
+    resizedImg = originalImg.resize((w, h),Image.ANTIALIAS)
+    img = ImageTk.PhotoImage(resizedImg)
 
+    panel = Label(root, image = img)
+    panel.pack(side = "bottom", fill = "both", expand = "yes")
 
-root.mainloop()
+    root.mainloop()
 
 
 

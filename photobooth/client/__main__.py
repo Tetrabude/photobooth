@@ -5,6 +5,7 @@ import subprocess
 import sys
 
 import gphoto2 as gp
+import photobooth.client.showPhoto as showPhoto
 
 def main():
     context = gp.gp_context_new()
@@ -29,6 +30,10 @@ def main():
     gp.check_result(gp.gp_file_save(camera_file, target))
     
     gp.check_result(gp.gp_camera_exit(camera, context))
+    
+    print('Open image in gui')
+    
+    showPhoto(target)
     
     return 0
 
