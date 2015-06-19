@@ -1,0 +1,7 @@
+Bild Anzeigen:
+http://stackoverflow.com/questions/10133856/how-to-add-an-image-in-tkinter-python-2-7
+http://www.tkdocs.com/tutorial/index.html
+
+gphoto2 updater:
+https://github.com/gonzalo/gphoto2-updater
+
