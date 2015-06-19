@@ -6,34 +6,26 @@ Created on 19.06.2015
 
 from tkinter import *
 from PIL import ImageTk, Image
-import os
-
-
-class FullScreenApp(object):
-    def __init__(self, master, **kwargs):
-        self.master=master
-        pad=3
-        self._geom='200x200+0+0'
-        master.geometry("{0}x{1}+0+0".format(
-            master.winfo_screenwidth()-pad, master.winfo_screenheight()-pad))
-        master.bind('<Escape>',self.toggle_geom)            
-    def toggle_geom(self,event):
-        geom=self.master.winfo_geometry()
-        print(geom,self._geom)
-        self.master.geometry(self._geom)
-        self._geom=geom
-
 
 root = Tk()
 root.title("Arthur rennt durchs Bild")
-root.overrideredirect(1)
-img = ImageTk.PhotoImage(Image.open("test-kl.jpg"))
+root.overrideredirect(True)
+
+w, h = root.winfo_screenwidth(), root.winfo_screenheight()
+root.geometry("%dx%d+0+0" % (w, h))
+
+originalImg = Image.open("test.jpg")
+resizedImg = originalImg.resize((w, h),Image.ANTIALIAS)
+img = ImageTk.PhotoImage(resizedImg)
+
 panel = Label(root, image = img)
 panel.pack(side = "bottom", fill = "both", expand = "yes")
 
-app=FullScreenApp(root)
 
 root.mainloop()
+
+
+
 
 
 
