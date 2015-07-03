@@ -11,7 +11,7 @@ from PIL import ImageTk, Image
 
 def main():
     
-    os.system("bash -c \"sudo gvfs-mount -s gphoto2\"")
+    os.system("bash -c \"gvfs-mount -s gphoto2\"")
     
     context = gp.gp_context_new()
     camera = gp.check_result(gp.gp_camera_new())
