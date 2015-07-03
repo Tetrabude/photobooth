@@ -4,7 +4,7 @@ import os
 import subprocess
 import sys
 
-# import gphoto2 as gp
+import gphoto2 as gp
 
 from tkinter import *
 
