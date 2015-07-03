@@ -31,9 +31,9 @@ def main():
             camera, file_path.folder, file_path.name,
             gp.GP_FILE_TYPE_NORMAL, context))
     
-     gp.check_result(gp.gp_file_save(camera_file, target))
+    gp.check_result(gp.gp_file_save(camera_file, target))
     
-     gp.check_result(gp.gp_camera_exit(camera, context))
+    gp.check_result(gp.gp_camera_exit(camera, context))
     
     print('Open image in gui')
     
