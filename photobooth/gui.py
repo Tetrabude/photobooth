@@ -2,6 +2,7 @@ from tkinter import *
 
 
 from PIL import ImageTk, Image
+import time
 
 class gui():
     
@@ -29,10 +30,10 @@ class gui():
         originalLogo = Image.open("Kontingentsabzeichen.png")
         originalLogo = originalLogo.resize(( int(self.h*0.27), int(self.h*0.27) ),Image.ANTIALIAS)
         self.logo = ImageTk.PhotoImage(originalLogo)
-        Label(self.root, image=self.logo).grid(row=1, column=1, rowspan=2, padx=5, pady=5)
+        Label(self.root, image=self.logo).grid(row=1, column=1, rowspan=3, padx=5, pady=5)
         
     def loadImage(self):
-        originalImg = Image.open(self.cam.getPhotoPath())
+        originalImg = Image.open(self.cam.takePhoto())
         (originalImgWidth, originalImgHeight) = originalImg.size
         imgProportion = originalImgWidth / originalImgHeight
     
@@ -48,15 +49,16 @@ class gui():
     def loadButtons(self):
     
         Label(self.root, text="Lorem Ipsum").grid(row=0, column=1)
-    
-        Button(self.root, text="Discard Picture").grid(row=1, column=0, sticky=W+E+N+S)
-    
-        Button(self.root, text="Upload Picture").grid(row=2, column=0, sticky=W+E+N+S)
-    
         
+        Button(self.root, text="Take Picture", command = self.takePicture).grid(row=1, column=0, sticky=W+E+N+S)
     
+        Button(self.root, text="Discard Picture").grid(row=2, column=0, sticky=W+E+N+S)
     
+        Button(self.root, text="Upload Picture").grid(row=3, column=0, sticky=W+E+N+S)
+
     
+    def takePicture(self):
+        self.loadImage()
        
 
         #panel = Label(root, image = img)
