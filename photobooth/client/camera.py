@@ -9,18 +9,14 @@ import os
 try:
     import gphoto2 as gp
     print("gphoto2 loaded")
-except ImportError:
-    #from client.gphoto2Mock import gphoto2Mock as gp
-    print("mock loaded")
+except ImportError: 
+    print("Camera could not be imported")
     
     
 class camera():
     
     def __init__(self):
         print('Camera initialized')
-    
-    def getPhotoPath(self):
-        return "test.jpg"
     
     def takePhoto(self):
     
@@ -46,7 +42,7 @@ class camera():
     
         gp.check_result(gp.gp_camera_exit(camera, context))  
     
-    
+        return target
 
 
 

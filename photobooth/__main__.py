@@ -8,7 +8,14 @@ import sys
 
 
 from photobooth.gui import gui
-from photobooth.client.camera import camera
+
+try:
+    import gphoto2 as gp
+    print("gphoto2 loaded")
+    from photobooth.client.camera import camera as camera
+except ImportError:
+    print("cameraMock loaded")
+    from photobooth.client.cameraMock import cameraMock as camera
 
 
 def main():

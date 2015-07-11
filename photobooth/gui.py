@@ -3,8 +3,6 @@ from tkinter import *
 
 from PIL import ImageTk, Image
 
-from photobooth.client.camera import camera
-
 class gui():
     
 
