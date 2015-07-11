@@ -2,7 +2,7 @@ from tkinter import *
 
 
 from PIL import ImageTk, Image
-import time
+from photobooth.server.flickr import flickr
 
 class gui():
     
@@ -15,7 +15,8 @@ class gui():
         
         print('Gui initialized')
 
-        self.w, self.h = self.root.winfo_screenwidth(), self.root.winfo_screenheight()
+        #self.w, self.h = self.root.winfo_screenwidth(), self.root.winfo_screenheight()
+        self.w, self.h = 1200, 800
         self.root.geometry("%dx%d+0+0" % (self.w, self.h))
         
         self.loadButtons()
@@ -33,7 +34,8 @@ class gui():
         Label(self.root, image=self.logo).grid(row=1, column=1, rowspan=3, padx=5, pady=5)
         
     def loadImage(self):
-        originalImg = Image.open(self.cam.takePhoto())
+        self.photoPath = self.cam.takePhoto()
+        originalImg = Image.open(self.photoPath)
         (originalImgWidth, originalImgHeight) = originalImg.size
         imgProportion = originalImgWidth / originalImgHeight
     
@@ -52,13 +54,16 @@ class gui():
         
         Button(self.root, text="Take Picture", command = self.takePicture).grid(row=1, column=0, sticky=W+E+N+S)
     
-        Button(self.root, text="Discard Picture").grid(row=2, column=0, sticky=W+E+N+S)
+        Button(self.root, text="Discard Picture").grid(row=3, column=0, sticky=W+E+N+S)
     
-        Button(self.root, text="Upload Picture").grid(row=3, column=0, sticky=W+E+N+S)
+        Button(self.root, text="Upload Picture", command = self.uploadPicture).grid(row=2, column=0, sticky=W+E+N+S)
 
     
     def takePicture(self):
         self.loadImage()
+        
+    def uploadPicture(self):
+        flickr.upload(self.photoPath)
        
 
         #panel = Label(root, image = img)
