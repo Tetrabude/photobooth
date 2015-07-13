@@ -1,8 +1,7 @@
 import Tkinter
-
+import server
 
 from PIL import ImageTk, Image
-from server.flickr import flickr
 
 class gui():
     
@@ -63,7 +62,7 @@ class gui():
         self.loadImage()
         
     def uploadPicture(self):
-        flickr.upload(self.photoPath)
+        server.flickrConnect.upload(self.photoPath)
        
 
         #panel = Label(root, image = img)
