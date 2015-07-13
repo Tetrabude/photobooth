@@ -9,8 +9,7 @@ api_secret = u'042eb1bdb5531c1f'
 flickr = flickrapi.FlickrAPI(api_key, api_secret)
 
 def checkAuthentication():
-    print('Authenticate')
-
+    print('Check Flickr Authentification')
     # Only do this if we don't have a valid token already
     if not flickr.token_valid(perms='write'):
 
@@ -28,9 +27,13 @@ def checkAuthentication():
 #
         # Trade the request token for an access token
         flickr.get_access_token(verifier)
-
+        
+        print('Authentification successfull')
+    else:
+        print('Already Authentificated')
 
 def upload(filename):
+    print('Start Authentification')
     checkAuthentication()
 
     resp = flickr.upload(filename)
