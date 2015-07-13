@@ -30,7 +30,7 @@ class flickrConnect():
             verifier = unicode(raw_input('Verifier code: '))
             #
             # Trade the request token for an access token
-            self.flickr.get_access_token(uVerifier)
+            self.flickr.get_access_token(verifier)
             
             print('Authentification successfull')
         else:
