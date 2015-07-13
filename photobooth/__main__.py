@@ -6,21 +6,23 @@ import sys
 
 
 
-import gui
+from photobooth.gui import gui
 
 try:
     import gphoto2 as gp
     print("gphoto2 loaded")
-    import client.camera as camera
+    from photobooth.client.camera import camera as camera
+
 except ImportError:
     print("cameraMock loaded")
-    import client.cameraMock as camera
+    from photobooth.client.cameraMock import cameraMock as camera
+
 
 
 def main():
     print('Main rutine started')
-    cam = camera.camera()
-    g = gui.gui(cam)
+    cam = camera()
+    g = gui(cam)
 
     g.run()
     
