@@ -6,16 +6,16 @@ import sys
 
 
 
-from photobooth.gui import gui
+from gui import gui
 
 try:
     import gphoto2 as gp
     print("gphoto2 loaded")
-    from photobooth.client.camera import camera as camera
+    from client.camera import camera as camera
 
 except ImportError:
     print("cameraMock loaded")
-    from photobooth.client.cameraMock import cameraMock as camera
+    from client.cameraMock import cameraMock as camera
 
 
 

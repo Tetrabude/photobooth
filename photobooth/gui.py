@@ -1,8 +1,8 @@
-from tkinter import *
+import Tkinter
 
 
 from PIL import ImageTk, Image
-from photobooth.server.flickr import flickr
+from server.flickr import flickr
 
 class gui():
     
@@ -10,7 +10,7 @@ class gui():
     def __init__(self, cam):
         self.cam = cam
         
-        self.root = Tk()
+        self.root = Tkinter.Tk()
         self.root.overrideredirect(True)
         
         print('Gui initialized')
@@ -31,7 +31,7 @@ class gui():
         originalLogo = Image.open("Kontingentsabzeichen.png")
         originalLogo = originalLogo.resize(( int(self.h*0.27), int(self.h*0.27) ),Image.ANTIALIAS)
         self.logo = ImageTk.PhotoImage(originalLogo)
-        Label(self.root, image=self.logo).grid(row=1, column=1, rowspan=3, padx=5, pady=5)
+        Tkinter.Label(self.root, image=self.logo).grid(row=1, column=1, rowspan=3, padx=5, pady=5)
         
     def loadImage(self):
         self.photoPath = self.cam.takePhoto()
@@ -45,18 +45,18 @@ class gui():
         resizedImg = originalImg.resize((imgWidth , imgHeight),Image.ANTIALIAS)
         self.img = ImageTk.PhotoImage(resizedImg)
         
-        Label(self.root, image = self.img).grid(row=0, column=0)
+        Tkinter.Label(self.root, image = self.img).grid(row=0, column=0)
         #img.grid(row=0, column=0, sticky=W+E+N+S, padx=5, pady=5)
     
     def loadButtons(self):
     
-        Label(self.root, text="Lorem Ipsum").grid(row=0, column=1)
+        Tkinter.Label(self.root, text="Lorem Ipsum").grid(row=0, column=1)
         
-        Button(self.root, text="Take Picture", command = self.takePicture).grid(row=1, column=0, sticky=W+E+N+S)
+        Tkinter.Button(self.root, text="Take Picture", command = self.takePicture).grid(row=1, column=0)
     
-        Button(self.root, text="Discard Picture").grid(row=3, column=0, sticky=W+E+N+S)
+        Tkinter.Button(self.root, text="Discard Picture").grid(row=3, column=0)
     
-        Button(self.root, text="Upload Picture", command = self.uploadPicture).grid(row=2, column=0, sticky=W+E+N+S)
+        Tkinter.Button(self.root, text="Upload Picture", command = self.uploadPicture).grid(row=2, column=0)
 
     
     def takePicture(self):
