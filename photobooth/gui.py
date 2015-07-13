@@ -11,7 +11,7 @@ class gui():
         self.cam = cam
         
         self.root = Tkinter.Tk()
-        self.root.overrideredirect(True)
+        #self.root.overrideredirect(True)
         
         print('Gui initialized')
 
