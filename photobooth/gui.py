@@ -1,7 +1,7 @@
 import Tkinter
-import server
 
 from PIL import ImageTk, Image
+from server import flickrConnect as fCon
 
 class gui():
     
@@ -14,7 +14,7 @@ class gui():
         
         print('Gui initialized')
 
-        self.w, self.h = self.root.winfo_screenwidth(), self.root.winfo_screenheight()
+        self.w, self.h = self.root.winfo_screenwidth()-25, self.root.winfo_screenheight()-25
         #self.w, self.h = 1200, 800
         self.root.geometry("%dx%d+0+0" % (self.w, self.h))
         
@@ -62,7 +62,8 @@ class gui():
         self.loadImage()
         
     def uploadPicture(self):
-        server.flickrConnect.upload(self.photoPath)
+        fInst = fCon.flickrConnect()
+        fInst.upload(self.photoPath)
        
 
         #panel = Label(root, image = img)
