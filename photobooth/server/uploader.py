@@ -8,6 +8,8 @@ import time
 import os
 import flickrConnect as fCon
 import threading
+from pip._vendor.requests.exceptions import ConnectionError
+from requests.exceptions import ConnectionError
 
 class uploaderThread(threading.Thread):
     
@@ -24,8 +26,16 @@ class uploaderThread(threading.Thread):
         for picture in os.listdir(self.path):
             if picture.endswith(".jpg"):
                 print('Upload: ' + picture)
-                fInst = fCon.flickrConnect()
-                fInst.upload(self.path + picture)
+                              
+                try: 
+                    fInst = fCon.flickrConnect()
+                    resp = fInst.upload(self.path + picture)
+                    print(resp)
+                    print('Remove:' + picture)
+                    os.remove(self.path + picture)
+                
+                except ConnectionError as e:
+                    print(e)
         
     def run(self):
         while not self._stop_req.isSet():

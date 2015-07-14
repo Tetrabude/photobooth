@@ -24,12 +24,12 @@ def main():
     print('Main rutine started')
     dir = os.path.dirname(__file__)
     dir = os.path.abspath(dir + '/../')
-    
+    uploadDir = (dir +'/uploadPictures/')
     
     cam = camera()
-    g = gui(cam)
+    g = gui(cam,uploadDir)
     
-    deamon = uploaderThread(dir +'/uploadPictures/')
+    deamon = uploaderThread(uploadDir)
     deamon.start()
     g.run()
     deamon.stop()

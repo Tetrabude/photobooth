@@ -1,14 +1,17 @@
 import Tkinter
+import os
+import time
 
 from PIL import ImageTk, Image
 from server import flickrConnect as fCon
+from pip._vendor.distlib._backport.shutil import copyfile
 
 class gui():
     
 
-    def __init__(self, cam):
+    def __init__(self, cam, uploadDir):
         self.cam = cam
-        
+        self.uploadDir = uploadDir
         self.root = Tkinter.Tk()
         #self.root.overrideredirect(True)
         
@@ -62,16 +65,20 @@ class gui():
     
         self.deleteIcon = Image.open("icon/Rubbish.png")
         self.deleteIcon = ImageTk.PhotoImage(self.deleteIcon)
-        Tkinter.Button(self.root, text="Upload Picture", image=self.deleteIcon).place(x=self.w - 280, y= 630)
+        Tkinter.Button(self.root, text="Upload Picture", image=self.deleteIcon, command = self.delPicture).place(x=self.w - 280, y= 630)
 
     
     def takePicture(self):
         self.loadImage()
         
     def uploadPicture(self):
-        fInst = fCon.flickrConnect()
-        fInst.upload(self.photoPath)
+        copyfile(self.photoPath, self.uploadDir + self.getPhotoName())
+
+    def delPicture(self):
+        os.remove(self.photoPath)
        
+    def getPhotoName(self):
+        return time.strftime("%Y-%m-%d--%H-%M-%S") + '--GermanPhotoBooth.jpg'
 
         #panel = Label(root, image = img)
         # panel.pack(side = "bottom", fill = "both", expand = "yes")
