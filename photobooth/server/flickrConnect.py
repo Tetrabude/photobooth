@@ -14,28 +14,33 @@ class flickrConnect():
         self.flickr = flickrapi.FlickrAPI(self.api_key, self.api_secret)
 
     def checkAuthentication(self):
-        print('Check Flickr Authentification')
-        # Only do this if we don't have a valid token already
-        if not self.flickr.token_valid(perms=u'write'):
-    
-            # Get a request token
-            self.flickr.get_request_token(oauth_callback=u'oob')
-    
-            # Open a browser at the authentication URL. Do this however
-            # you want, as long as the user visits that URL.
-            authorize_url = self.flickr.auth_url(perms=u'write')
-            webbrowser.open_new_tab(authorize_url)
-    
-            # Get the verifier code from the user. Do this however you
-            # want, as long as the user gives the application the code.
-            verifier = unicode(raw_input('Verifier code: '))
-            #
-            # Trade the request token for an access token
-            self.flickr.get_access_token(verifier)
+        try:
+            print('Check Flickr Authentification')
+            # Only do this if we don't have a valid token already
+            if not self.flickr.token_valid(perms=u'write'):
+                print('Get request Token')
+                # Get a request token
+                self.flickr.get_request_token(oauth_callback=u'oob')
+        
+                # Open a browser at the authentication URL. Do this however
+                # you want, as long as the user visits that URL.
+                authorize_url = self.flickr.auth_url(perms=u'write')
+                webbrowser.open_new_tab(authorize_url)
+        
+                # Get the verifier code from the user. Do this however you
+                # want, as long as the user gives the application the code.
+                verifier = unicode(raw_input('Verifier code: '))
+                #
+                # Trade the request token for an access token
+                self.flickr.get_access_token(verifier)
+                
+                print('Authentification successfull')
+            else:
+                print('Already Authentificated')
+        except Exception as e:
+            print('Authentification Exception: ') 
+            print(e)
             
-            print('Authentification successfull')
-        else:
-            print('Already Authentificated')
 
     def upload(self, filename):
         try:
@@ -43,7 +48,11 @@ class flickrConnect():
             self.checkAuthentication()
             print('Upload Photo')
             resp = self.flickr.upload(filename)
-        except ConnectionError:
-            print('ConnectionError')
+            return resp
             
-        print(resp)
+        except Exception as e:
+            print('Connection Error in Upload')
+            print(e)
+            
+            
+        
