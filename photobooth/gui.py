@@ -30,7 +30,7 @@ class gui():
         originalLogo = Image.open("Kontingentsabzeichen.png")
         originalLogo = originalLogo.resize(( 175, 175 ),Image.ANTIALIAS)
         self.logo = ImageTk.PhotoImage(originalLogo)
-        Tkinter.Label(self.root, image=self.logo).place(x=self.w - 180, y= self.h - 180)
+        Tkinter.Label(self.root, image=self.logo).place(x=30, y= self.h - 220)
         
     def loadImage(self):
         self.photoPath = self.cam.takePhoto()
@@ -38,8 +38,8 @@ class gui():
         (originalImgWidth, originalImgHeight) = originalImg.size
         imgProportion = originalImgWidth / originalImgHeight
     
-        imgWidth = self.w - 200 # int(self.w * 0.72)
-        imgHeight = self.h - 200 #int(imgWidth / imgProportion)
+        imgWidth = self.w - 300 # int(self.w * 0.72)
+        imgHeight = self.h - 250 #int(imgWidth / imgProportion)
         
         resizedImg = originalImg.resize((imgWidth , imgHeight),Image.ANTIALIAS)
         self.img = ImageTk.PhotoImage(resizedImg)
@@ -49,13 +49,20 @@ class gui():
     
     def loadButtons(self):
     
-        Tkinter.Label(self.root, text="Lorem Ipsum").place(x=self.w - 180, y= 10)
+        Tkinter.Label(self.root, text="Lorem Ipsum").place(x = 250, y= self.h - 220)
         
-        Tkinter.Button(self.root, text="Take Picture", command = self.takePicture).place(x= 20, y= self.h-180)
+        
+        self.cameraIcon = Image.open("icon/Camera.png")
+        self.cameraIcon = ImageTk.PhotoImage(self.cameraIcon)
+        Tkinter.Button(self.root, text="Take Picture", image=self.cameraIcon, command = self.takePicture).place(x=self.w - 280, y= 30)
     
-        Tkinter.Button(self.root, text="Discard Picture").place(x= 20, y= self.h-140)
+        self.cloudIcon = Image.open("icon/Upload.png")
+        self.cloudIcon = ImageTk.PhotoImage(self.cloudIcon)
+        Tkinter.Button(self.root, text="Discard Picture",image=self.cloudIcon, command = self.uploadPicture ).place(x=self.w - 280, y= 330)
     
-        Tkinter.Button(self.root, text="Upload Picture", command = self.uploadPicture).place(x= 20, y= self.h-100)
+        self.deleteIcon = Image.open("icon/Rubbish.png")
+        self.deleteIcon = ImageTk.PhotoImage(self.deleteIcon)
+        Tkinter.Button(self.root, text="Upload Picture", image=self.deleteIcon).place(x=self.w - 280, y= 630)
 
     
     def takePicture(self):
