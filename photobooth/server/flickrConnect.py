@@ -7,7 +7,6 @@ from pip._vendor.requests.exceptions import ConnectionError
 class flickrConnect():
     
     def __init__(self):
-        print('Flickr initialize')
         self.api_key = u'9460c8c076928bf8239504139c1e8c88'
         self.api_secret = u'042eb1bdb5531c1f'
 
@@ -15,7 +14,7 @@ class flickrConnect():
 
     def checkAuthentication(self):
         try:
-            print('Check Flickr Authentification')
+            print('Flickr Authentification')
             # Only do this if we don't have a valid token already
             if not self.flickr.token_valid(perms=u'write'):
                 print('Get request Token')
@@ -32,11 +31,9 @@ class flickrConnect():
                 verifier = unicode(raw_input('Verifier code: '))
                 #
                 # Trade the request token for an access token
-                self.flickr.get_access_token(verifier)
-                
+                self.flickr.get_access_token(verifier)                
                 print('Authentification successfull')
-            else:
-                print('Already Authentificated')
+
         except Exception as e:
             print('Authentification Exception: ') 
             print(e)
@@ -44,7 +41,6 @@ class flickrConnect():
 
     def upload(self, filename):
         try:
-            print('Start Authentification')
             self.checkAuthentication()
             print('Upload Photo')
             resp = self.flickr.upload(filename)
