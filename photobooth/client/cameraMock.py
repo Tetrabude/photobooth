@@ -8,7 +8,7 @@ class cameraMock():
         return "test.jpg"
     
     def takePhoto(self):
-        
+        print('new photo mock')
         if self.lastPic == "test.jpg" :
             self.lastPic ="bild.jpg"
         else :

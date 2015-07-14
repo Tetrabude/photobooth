@@ -2,6 +2,7 @@
 
 import flickrapi
 import webbrowser
+from pip._vendor.requests.exceptions import ConnectionError
 
 class flickrConnect():
     
@@ -37,9 +38,12 @@ class flickrConnect():
             print('Already Authentificated')
 
     def upload(self, filename):
-        print('Start Authentification')
-        self.checkAuthentication()
-    
-        resp = self.flickr.upload(filename)
-    
+        try:
+            print('Start Authentification')
+            self.checkAuthentication()
+            print('Upload Photo')
+            resp = self.flickr.upload(filename)
+        except ConnectionError:
+            print('ConnectionError')
+            
         print(resp)

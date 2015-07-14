@@ -7,6 +7,7 @@ import sys
 
 
 from gui import gui
+from server.uploader import uploaderThread
 
 try:
     import gphoto2 as gp
@@ -21,11 +22,20 @@ except ImportError:
 
 def main():
     print('Main rutine started')
+    dir = os.path.dirname(__file__)
+    dir = os.path.abspath(dir + '/../')
+    
+    
     cam = camera()
     g = gui(cam)
-
-    g.run()
     
+    deamon = uploaderThread(dir +'/uploadPictures/')
+    deamon.start()
+    g.run()
+    deamon.stop()
+    deamon.join()
+    
+
     
 if __name__ == "__main__":
     sys.exit(main())
