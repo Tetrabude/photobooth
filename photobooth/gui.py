@@ -4,7 +4,7 @@ import time
 
 from PIL import ImageTk, Image
 from server import flickrConnect as fCon
-from pip._vendor.distlib._backport.shutil import copyfile
+from shutil import copyfile
 
 class gui():
     
