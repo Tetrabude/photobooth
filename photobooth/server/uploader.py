@@ -8,7 +8,6 @@ import time
 import os
 import flickrConnect as fCon
 import threading
-from pip._vendor.requests.exceptions import ConnectionError
 import xml.etree
 
 class uploaderThread(threading.Thread):
