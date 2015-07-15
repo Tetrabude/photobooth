@@ -2,7 +2,6 @@
 
 import flickrapi
 import webbrowser
-from pip._vendor.requests.exceptions import ConnectionError
 
 class flickrConnect():
     
