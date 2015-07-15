@@ -55,7 +55,7 @@ class gui():
     
     def loadButtons(self):
     
-        self.infoLabel = Tkinter.Label(self.root, text="Info", font=("Roboto-Regular.ttf", 80))
+        self.infoLabel = Tkinter.Label(self.root, text="Info", font=("Roboto-Regular.ttf", 60))
         self.infoLabel.place(x = 250, y= self.h - 220)
         
         self.connectionLabel = Tkinter.Label(self.root, text="", font=("Roboto-Regular.ttf", 30))
@@ -138,6 +138,7 @@ class gui():
         self.root.update()
         
     def tagImage(self, originalImg):
+        print('tag image')
         originalImgWidth, originalImgHeight = originalImg.size
         logoImg = Image.open("Kontingentsabzeichen.png")
         
@@ -145,12 +146,13 @@ class gui():
         offset = ((originalImgWidth - img_w - 10) , (originalImgHeight - img_h - 10))
         originalImg.paste(logoImg, offset)
         
-        font = ImageFont.truetype("Roboto-Regular.ttf",80)
+        font = ImageFont.truetype("Roboto-Regular.ttf",60)
         draw = ImageDraw.Draw(originalImg)
         draw.text((20 , originalImgHeight - 100),"#germanphotobooth",(255,255,255),font=font)
         draw = ImageDraw.Draw(originalImg)
         
     def resizeImage(self, originalImg):
+        print('resize image')
         originalImgWidth, originalImgHeight = originalImg.size
         imgProportion = float(originalImgWidth) / float(originalImgHeight)
         

@@ -56,7 +56,7 @@ class uploaderThread(threading.Thread):
             print('Deamon is looking for new pictures')
             self.upload(self.path,1)
             self.upload(self.privpath,0)
-            time.sleep(5)
+            time.sleep(10)
     
     def stop(self):
         self._stop_req.set();
