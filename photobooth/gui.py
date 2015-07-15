@@ -113,7 +113,7 @@ class gui():
 
     def takePhotoState(self):
         self.infoLabel['foreground'] = "royal blue"
-        self.infoLabel['text'] = "Take a photo!"
+        self.infoLabel['text'] = "Take a picture!"
         
         self.takePictureBtn['state'] = 'normal'
         self.discardPictureBtn['state'] = 'disabled'
@@ -130,10 +130,10 @@ class gui():
     def setConnectionStatus(self, status, remainingPics):
         if status:
             self.connectionLabel['foreground'] = "dark green"
-            self.connectionLabel['text'] = str(remainingPics) + " photo(s) waiting for upload"
+            self.connectionLabel['text'] = str(remainingPics) + " picture(s) waiting for upload"
         else:
             self.connectionLabel['foreground'] = "red"
-            self.connectionLabel['text'] = "No internet at the moment \n" + str(remainingPics) +" photo(s) will be uploaded later"
+            self.connectionLabel['text'] = "No internet at the moment \n" + str(remainingPics) +" picture(s) will be uploaded later"
 
     def count(self, sec):
         for i in range(sec,0,-1):
