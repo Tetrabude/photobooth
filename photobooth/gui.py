@@ -2,8 +2,7 @@ import Tkinter
 import os
 import time
 
-from PIL import ImageTk, Image
-from server import flickrConnect as fCon
+from PIL import ImageTk, Image, ImageFont, ImageDraw
 from shutil import copyfile
 
 class gui():
@@ -42,19 +41,10 @@ class gui():
         
         self.photoPath = self.cam.takePhoto()
         originalImg = Image.open(self.photoPath)
-        (originalImgWidth, originalImgHeight) = originalImg.size
         
-        imgProportion = float(originalImgWidth) / float(originalImgHeight)
-        
-        imgWidth = self.w - 300 # int(self.w * 0.72)
-        imgHeight = int(float(imgWidth) / float(imgProportion))
-        
-        if imgHeight > (self.h - 250):
-            imgHeight = self.h - 250
-            imgWidth = int(float(imgHeight)*float(imgProportion))
-        
-        resizedImg = originalImg.resize((imgWidth , imgHeight),Image.ANTIALIAS)
-        self.img = ImageTk.PhotoImage(resizedImg)
+        self.tagImage(originalImg)
+        #originalImg.save(self.photoPath)
+        self.resizeImage(originalImg)
                
         self.imgLabel = Tkinter.Label(self.root, image = self.img)
         self.imgLabel.place(x=5, y=5)
@@ -62,13 +52,13 @@ class gui():
     
     def loadButtons(self):
     
-        self.infoLabel = Tkinter.Label(self.root, text="Info", font=("Helvetica", 80))
+        self.infoLabel = Tkinter.Label(self.root, text="Info", font=("Roboto-Regular.ttf", 80))
         self.infoLabel.place(x = 250, y= self.h - 220)
         
-        self.connectionLabel = Tkinter.Label(self.root, text="", font=("Helvetica", 30))
+        self.connectionLabel = Tkinter.Label(self.root, text="", font=("Roboto-Regular.ttf", 30))
         self.connectionLabel.place(x = 250, y= self.h - 100)
         
-        self.counterLabel = Tkinter.Label(self.root, text="", font=("Helvetica",500), foreground="red")
+        self.counterLabel = Tkinter.Label(self.root, text="", font=("Roboto-Regular.ttf",500), foreground="red")
         self.counterLabel.place(x=20, y=20)
         
         self.cameraIcon = Image.open("icon/Camera.png")
@@ -143,5 +133,31 @@ class gui():
         
         self.counterLabel['text'] = ""
         self.root.update()
-
+        
+    def tagImage(self, originalImg):
+        originalImgWidth, originalImgHeight = originalImg.size
+        logoImg = Image.open("Kontingentsabzeichen.png")
+        
+        img_w, img_h = logoImg.size
+        offset = ((originalImgWidth - img_w - 10) , (originalImgHeight - img_h - 10))
+        originalImg.paste(logoImg, offset)
+        
+        font = ImageFont.truetype("Roboto-Regular.ttf",80)
+        draw = ImageDraw.Draw(originalImg)
+        draw.text((20 , originalImgHeight - 100),"#germanphotobooth",(255,255,255),font=font)
+        draw = ImageDraw.Draw(originalImg)
+        
+    def resizeImage(self, originalImg):
+        originalImgWidth, originalImgHeight = originalImg.size
+        imgProportion = float(originalImgWidth) / float(originalImgHeight)
+        
+        imgWidth = self.w - 300 # int(self.w * 0.72)
+        imgHeight = int(float(imgWidth) / float(imgProportion))
+        
+        if imgHeight > (self.h - 250):
+            imgHeight = self.h - 250
+            imgWidth = int(float(imgHeight)*float(imgProportion))
+        
+        resizedImg = originalImg.resize((imgWidth , imgHeight),Image.ANTIALIAS)
+        self.img = ImageTk.PhotoImage(resizedImg)
         

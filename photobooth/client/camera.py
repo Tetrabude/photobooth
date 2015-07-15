@@ -43,8 +43,7 @@ class camera():
         gp.check_result(gp.gp_camera_exit(camera, context))  
     
         return target
-
-
+        
 
 
 
