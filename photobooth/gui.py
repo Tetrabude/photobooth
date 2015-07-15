@@ -63,7 +63,8 @@ class gui():
     
     def loadButtons(self):
     
-        Tkinter.Label(self.root, text="Lorem Ipsum").place(x = 250, y= self.h - 220)
+        self.infoLabel = Tkinter.Label(self.root, text="Info", font=("Helvetica", 80))
+        self.infoLabel.place(x = 250, y= self.h - 220)
         
         
         self.cameraIcon = Image.open("icon/Camera.png")
@@ -106,11 +107,17 @@ class gui():
         # panel.pack(side = "bottom", fill = "both", expand = "yes")
 
     def takePhotoState(self):
+        self.infoLabel['foreground'] = "royal blue"
+        self.infoLabel['text'] = "Take a photo!"
+        
         self.takePictureBtn['state'] = 'normal'
         self.discardPictureBtn['state'] = 'disabled'
         self.uploadPictureBtn['state'] = 'disabled'
     
     def makeDesicionState(self):
+        self.infoLabel['foreground'] = "dark green"
+        self.infoLabel['text'] = "Upload or delete?"
+        
         self.takePictureBtn['state'] = 'disabled'
         self.discardPictureBtn['state'] = 'normal'
         self.uploadPictureBtn['state'] = 'normal'
