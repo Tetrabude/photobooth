@@ -30,8 +30,6 @@ class camera():
     
         print('Camera file path: {0}/{1}'.format(file_path.folder, file_path.name))
     
-        gp.get
-    
         target = os.path.join('/tmp', file_path.name)
     
         print('Copying image to', target)
