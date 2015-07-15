@@ -68,26 +68,35 @@ class gui():
         
         self.cameraIcon = Image.open("icon/Camera.png")
         self.cameraIcon = ImageTk.PhotoImage(self.cameraIcon)
-        Tkinter.Button(self.root, text="Take Picture", image=self.cameraIcon, command = self.takePicture).place(x=self.w - 280, y= 30)
+        self.takePictureBtn = Tkinter.Button(self.root, text="Take Picture", image=self.cameraIcon, command = self.takePicture)
+        self.takePictureBtn.place(x=self.w - 280, y= 30)
+        self.takePictureBtn['state'] = 'normal'
+    
     
         self.cloudIcon = Image.open("icon/Upload.png")
         self.cloudIcon = ImageTk.PhotoImage(self.cloudIcon)
-        Tkinter.Button(self.root, text="Discard Picture",image=self.cloudIcon, command = self.uploadPicture ).place(x=self.w - 280, y= 330)
-    
+        self.discardPictureBtn = Tkinter.Button(self.root, text="Discard Picture",image=self.cloudIcon, command = self.uploadPicture )
+        self.discardPictureBtn.place(x=self.w - 280, y= 330)
+        self.discardPictureBtn['state'] = 'disabled'
+        
         self.deleteIcon = Image.open("icon/Rubbish.png")
         self.deleteIcon = ImageTk.PhotoImage(self.deleteIcon)
-        Tkinter.Button(self.root, text="Upload Picture", image=self.deleteIcon, command = self.delPicture).place(x=self.w - 280, y= 630)
-
+        self.uploadPictureBtn = Tkinter.Button(self.root, text="Upload Picture", image=self.deleteIcon, command = self.delPicture)
+        self.uploadPictureBtn.place(x=self.w - 280, y= 630)
+        self.uploadPictureBtn['state'] = 'disabled'
     
     def takePicture(self):
         self.loadImage()
+        self.makeDesicionState()
         
     def uploadPicture(self):
         copyfile(self.photoPath, self.uploadDir + self.getPhotoName())
+        self.takePhotoState()
 
     def delPicture(self):
         self.imgLabel.destroy()
         print('Delete Picture: ')
+        self.takePhotoState()
         #os.remove(self.photoPath)    
        
     def getPhotoName(self):
@@ -97,7 +106,11 @@ class gui():
         # panel.pack(side = "bottom", fill = "both", expand = "yes")
 
     def takePhotoState(self):
-        pass
+        self.takePictureBtn['state'] = 'normal'
+        self.discardPictureBtn['state'] = 'disabled'
+        self.uploadPictureBtn['state'] = 'disabled'
     
     def makeDesicionState(self):
-        pass
+        self.takePictureBtn['state'] = 'disabled'
+        self.discardPictureBtn['state'] = 'normal'
+        self.uploadPictureBtn['state'] = 'normal'
