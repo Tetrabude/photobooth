@@ -14,7 +14,6 @@ class gui():
         self.uploadDir = uploadDir
         self.root = Tkinter.Tk()
         #self.root.overrideredirect(True)
-        
         print('Gui initialized')
 
         #self.w, self.h = self.root.winfo_screenwidth()-25, self.root.winfo_screenheight()-25
@@ -69,6 +68,8 @@ class gui():
         self.connectionLabel = Tkinter.Label(self.root, text="", font=("Helvetica", 30))
         self.connectionLabel.place(x = 250, y= self.h - 100)
         
+        self.counterLabel = Tkinter.Label(self.root, text="", font=("Helvetica",500), foreground="red")
+        self.counterLabel.place(x=20, y=20)
         
         self.cameraIcon = Image.open("icon/Camera.png")
         self.cameraIcon = ImageTk.PhotoImage(self.cameraIcon)
@@ -90,6 +91,7 @@ class gui():
         self.uploadPictureBtn['state'] = 'disabled'
     
     def takePicture(self):
+        self.count(5)
         self.loadImage()
         self.makeDesicionState()
         
@@ -132,3 +134,14 @@ class gui():
         else:
             self.connectionLabel['foreground'] = "red"
             self.connectionLabel['text'] = "No internet at the moment \n" + str(remainingPics) +" photo(s) will be uploaded later"
+
+    def count(self, sec):
+        for i in range(sec,0,-1):
+            self.counterLabel['text'] = str(i)
+            self.root.update()
+            time.sleep(1)
+        
+        self.counterLabel['text'] = ""
+        self.root.update()
+
+        
