@@ -31,7 +31,7 @@ def main():
     cam = camera()
     g = gui(cam,uploadDir)
     
-    deamon = uploaderThread(uploadDir)
+    deamon = uploaderThread(uploadDir, g)
     deamon.start()
     g.run()
     deamon.stop()

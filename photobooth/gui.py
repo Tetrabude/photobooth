@@ -66,6 +66,9 @@ class gui():
         self.infoLabel = Tkinter.Label(self.root, text="Info", font=("Helvetica", 80))
         self.infoLabel.place(x = 250, y= self.h - 220)
         
+        self.connectionLabel = Tkinter.Label(self.root, text="", font=("Helvetica", 30))
+        self.connectionLabel.place(x = 250, y= self.h - 100)
+        
         
         self.cameraIcon = Image.open("icon/Camera.png")
         self.cameraIcon = ImageTk.PhotoImage(self.cameraIcon)
@@ -121,3 +124,11 @@ class gui():
         self.takePictureBtn['state'] = 'disabled'
         self.discardPictureBtn['state'] = 'normal'
         self.uploadPictureBtn['state'] = 'normal'
+        
+    def setConnectionStatus(self, status, remainingPics):
+        if status:
+            self.connectionLabel['foreground'] = "dark green"
+            self.connectionLabel['text'] = str(remainingPics) + " photo(s) waiting for upload"
+        else:
+            self.connectionLabel['foreground'] = "red"
+            self.connectionLabel['text'] = "No internet at the moment \n" + str(remainingPics) +" photo(s) will be uploaded later"
