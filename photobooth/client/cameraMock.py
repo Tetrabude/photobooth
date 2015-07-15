@@ -5,13 +5,13 @@ class cameraMock():
         print('CameraMock initialized')
     
     def getPhotoPath(self):
-        return "test.jpg"
+        return "test01.jpg"
     
     def takePhoto(self):
         print('new photo mock')
-        if self.lastPic == "test.jpg" :
-            self.lastPic ="bild.jpg"
+        if self.lastPic == "test01.jpg" :
+            self.lastPic ="test02.jpg"
         else :
-            self.lastPic = "test.jpg"
+            self.lastPic = "test01.jpg"
             
         return self.lastPic

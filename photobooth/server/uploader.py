@@ -54,8 +54,8 @@ class uploaderThread(threading.Thread):
     def run(self):
         while not self._stop_req.isSet():
             print('Deamon is looking for new pictures')
-            self.upload(self.path,0)
-            self.upload(self.privpath,1)
+            self.upload(self.path,1)
+            self.upload(self.privpath,0)
             time.sleep(5)
     
     def stop(self):
