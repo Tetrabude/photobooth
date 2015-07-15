@@ -38,16 +38,18 @@ class flickrConnect():
             print(e)
             
 
-    def upload(self, filename):
+    def upload(self, filename, is_public):
         try:
             self.checkAuthentication()
             print('Upload Photo')
-            resp = self.flickr.upload(filename)
+            resp = self.flickr.upload(filename=filename, is_public=is_public, tags='''germanphotobooth "wsj2015"''')
             return resp
             
         except Exception as e:
             print('Connection Error in Upload')
             print(e)
+            
+
             
             
         

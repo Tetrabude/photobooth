@@ -8,9 +8,10 @@ from shutil import copyfile
 class gui():
     
 
-    def __init__(self, cam, uploadDir):
+    def __init__(self, cam, uploadDir, uploadPrivDir):
         self.cam = cam
         self.uploadDir = uploadDir
+        self.uploadPrivDir = uploadPrivDir
         self.root = Tkinter.Tk()
         #self.root.overrideredirect(True)
         print('Gui initialized')
@@ -42,8 +43,10 @@ class gui():
         self.photoPath = self.cam.takePhoto()
         originalImg = Image.open(self.photoPath)
         
+        copyfile(self.photoPath, self.uploadPrivDir + self.getPhotoName())
+        
         self.tagImage(originalImg)
-        #originalImg.save(self.photoPath)
+        originalImg.save(self.photoPath)
         self.resizeImage(originalImg)
                
         self.imgLabel = Tkinter.Label(self.root, image = self.img)
@@ -81,7 +84,7 @@ class gui():
         self.uploadPictureBtn['state'] = 'disabled'
     
     def takePicture(self):
-        self.count(5)
+        self.count(1)
         self.loadImage()
         self.makeDesicionState()
         

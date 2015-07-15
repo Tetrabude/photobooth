@@ -27,11 +27,12 @@ def main():
     dir = os.path.abspath(dir + '/../')
     print(dir)
     uploadDir = (dir +'/uploadPictures/')
+    uploadPrivDir = (dir + '/uploadPrivate/')
     
     cam = camera()
-    g = gui(cam,uploadDir)
+    g = gui(cam,uploadDir,uploadPrivDir)
     
-    deamon = uploaderThread(uploadDir, g)
+    deamon = uploaderThread(uploadDir, uploadPrivDir, g)
     deamon.start()
     g.run()
     deamon.stop()
