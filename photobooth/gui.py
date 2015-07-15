@@ -17,13 +17,13 @@ class gui():
         
         print('Gui initialized')
 
-        self.w, self.h = self.root.winfo_screenwidth()-25, self.root.winfo_screenheight()-25
-        #self.w, self.h = 1200, 800
+        #self.w, self.h = self.root.winfo_screenwidth()-25, self.root.winfo_screenheight()-25
+        self.w, self.h = 1280, 1024 #1024, 768 #800, 600#
         self.root.geometry("%dx%d+0+0" % (self.w, self.h))
         
         self.loadButtons()
         self.loadLogo()
-        self.loadImage()
+        
         
     def run(self):
         self.root.mainloop()
@@ -39,16 +39,19 @@ class gui():
         self.photoPath = self.cam.takePhoto()
         originalImg = Image.open(self.photoPath)
         (originalImgWidth, originalImgHeight) = originalImg.size
-        imgProportion = originalImgWidth / originalImgHeight
-    
+        
+        imgProportion = float(originalImgWidth) / float(originalImgHeight)
+        
         imgWidth = self.w - 300 # int(self.w * 0.72)
-        imgHeight = self.h - 250 #int(imgWidth / imgProportion)
+        imgHeight = int(float(imgWidth) / float(imgProportion))
+        
+        if imgHeight > (self.h - 250):
+            imgHeight = self.h - 250
+            imgWidth = int(float(imgHeight)*float(imgProportion))
         
         resizedImg = originalImg.resize((imgWidth , imgHeight),Image.ANTIALIAS)
         self.img = ImageTk.PhotoImage(resizedImg)
-        
-        
-        
+               
         self.imgLabel = Tkinter.Label(self.root, image = self.img)
         self.imgLabel.place(x=5, y=5)
         #img.grid(row=0, column=0, sticky=W+E+N+S, padx=5, pady=5)
@@ -81,9 +84,7 @@ class gui():
     def delPicture(self):
         self.imgLabel.destroy()
         print('Delete Picture: ')
-        #os.remove(self.photoPath)
-        
-        
+        #os.remove(self.photoPath)    
        
     def getPhotoName(self):
         return time.strftime("%Y-%m-%d--%H-%M-%S") + '--GermanPhotoBooth.jpg'
@@ -91,4 +92,8 @@ class gui():
         #panel = Label(root, image = img)
         # panel.pack(side = "bottom", fill = "both", expand = "yes")
 
-
+    def takePhotoState(self):
+        pass
+    
+    def makeDesicionState(self):
+        pass
