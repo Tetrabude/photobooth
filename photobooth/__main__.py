@@ -22,7 +22,7 @@ except ImportError:
 
 def main():
     print('Main rutine started')
-    dir = os.path.dirname(__file__)
+    dir = os.path.dirname(os.path.abspath(__file__))
     print(dir)
     dir = os.path.abspath(dir + '/../')
     print(dir)
