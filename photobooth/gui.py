@@ -47,7 +47,10 @@ class gui():
         resizedImg = originalImg.resize((imgWidth , imgHeight),Image.ANTIALIAS)
         self.img = ImageTk.PhotoImage(resizedImg)
         
-        self.imgLabel = Tkinter.Label(self.root, image = self.img).place(x=5, y=5)
+        
+        
+        self.imgLabel = Tkinter.Label(self.root, image = self.img)
+        self.imgLabel.place(x=5, y=5)
         #img.grid(row=0, column=0, sticky=W+E+N+S, padx=5, pady=5)
     
     def loadButtons(self):
@@ -69,15 +72,16 @@ class gui():
 
     
     def takePicture(self):
+        self.imgLabel.destroy()
         self.loadImage()
         
     def uploadPicture(self):
         copyfile(self.photoPath, self.uploadDir + self.getPhotoName())
 
     def delPicture(self):
-        #self.imgLabel.destroy()
+        self.imgLabel.destroy()
         print('Delete Picture: ')
-        os.remove(self.photoPath)
+        #os.remove(self.photoPath)
         
         
        
