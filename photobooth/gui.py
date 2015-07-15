@@ -23,6 +23,7 @@ class gui():
         
         self.loadButtons()
         self.loadLogo()
+        self.imgLabel = None
         
         
     def run(self):
@@ -36,6 +37,10 @@ class gui():
         Tkinter.Label(self.root, image=self.logo).place(x=30, y= self.h - 220)
         
     def loadImage(self):
+        
+        if not self.imgLabel is None:
+            self.imgLabel.destroy()
+        
         self.photoPath = self.cam.takePhoto()
         originalImg = Image.open(self.photoPath)
         (originalImgWidth, originalImgHeight) = originalImg.size
@@ -75,7 +80,6 @@ class gui():
 
     
     def takePicture(self):
-        self.imgLabel.destroy()
         self.loadImage()
         
     def uploadPicture(self):
