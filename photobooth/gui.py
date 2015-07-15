@@ -84,7 +84,10 @@ class gui():
         self.uploadPictureBtn['state'] = 'disabled'
     
     def takePicture(self):
-        self.count(1)
+        if not self.imgLabel is None:
+            self.imgLabel.destroy()
+            
+        self.count(5)
         self.loadImage()
         self.makeDesicionState()
         
