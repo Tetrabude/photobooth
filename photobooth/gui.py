@@ -20,6 +20,8 @@ class gui():
         self.w, self.h = 1280, 1024 #1024, 768 #800, 600#
         self.root.geometry("%dx%d+0+0" % (self.w, self.h))
         
+
+        self.loadPeter()
         self.loadButtons()
         self.loadLogo()
         self.imgLabel = None
@@ -35,6 +37,12 @@ class gui():
         self.logo = ImageTk.PhotoImage(originalLogo)
         Tkinter.Label(self.root, image=self.logo).place(x=30, y= self.h - 220)
         
+    def loadPeter(self):
+        peter = Image.open("peter.jpg")
+        self.smallPeter = self.resizeImage(peter)
+        self.smallPeterLabel = Tkinter.Label(self.root, image=self.smallPeter, font=("Roboto-Regular.ttf",500), foreground="red", text="", compound=Tkinter.CENTER)
+        self.smallPeterLabel.place(x=5,y=5)
+        
     def loadImage(self):
         
         if not self.imgLabel is None:
@@ -48,9 +56,9 @@ class gui():
         self.tagImage(originalImg)
         self.photoPathPubl = self.photoPath.split('.')[0] + "-publ.jpg" 
         originalImg.save(self.photoPathPubl)
-        self.resizeImage(originalImg)
+        self.img2 = self.resizeImage(originalImg)
                
-        self.imgLabel = Tkinter.Label(self.root, image = self.img)
+        self.imgLabel = Tkinter.Label(self.root, image = self.img2)
         self.imgLabel.place(x=5, y=5)
         #img.grid(row=0, column=0, sticky=W+E+N+S, padx=5, pady=5)
     
@@ -62,8 +70,6 @@ class gui():
         self.connectionLabel = Tkinter.Label(self.root, text="", font=("Roboto-Regular.ttf", 30))
         self.connectionLabel.place(x = 250, y= self.h - 100)
         
-        self.counterLabel = Tkinter.Label(self.root, text="", font=("Roboto-Regular.ttf",500), foreground="red")
-        self.counterLabel.place(x=20, y=20)
         
         self.cameraIcon = Image.open("icon/Camera.png")
         self.cameraIcon = ImageTk.PhotoImage(self.cameraIcon)
@@ -87,7 +93,7 @@ class gui():
     def takePicture(self):
         if not self.imgLabel is None:
             self.imgLabel.destroy()
-            
+           
         self.count(5)
         self.loadImage()
         self.makeDesicionState()
@@ -136,11 +142,11 @@ class gui():
 
     def count(self, sec):
         for i in range(sec,0,-1):
-            self.counterLabel['text'] = str(i)
+            self.smallPeterLabel['text'] = str(i)
             self.root.update()
             time.sleep(1)
         
-        self.counterLabel['text'] = ""
+        self.smallPeterLabel['text'] = ""
         self.root.update()
         
     def tagImage(self, originalImg):
@@ -170,5 +176,6 @@ class gui():
             imgWidth = int(float(imgHeight)*float(imgProportion))
         
         resizedImg = originalImg.resize((imgWidth , imgHeight),Image.ANTIALIAS)
-        self.img = ImageTk.PhotoImage(resizedImg)
+        img = ImageTk.PhotoImage(resizedImg)
+        return img
         
