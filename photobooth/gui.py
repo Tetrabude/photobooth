@@ -43,10 +43,11 @@ class gui():
         self.photoPath = self.cam.takePhoto()
         originalImg = Image.open(self.photoPath)
         
-        copyfile(self.photoPath, self.uploadPrivDir + self.getPhotoName())
+        #copyfile(self.photoPath, self.uploadPrivDir + self.getPhotoName())
         
         self.tagImage(originalImg)
-        originalImg.save(self.photoPath)
+        self.photoPathPubl = self.photoPath.split('.')[0] + "-publ.jpg" 
+        originalImg.save(self.photoPathPubl)
         self.resizeImage(originalImg)
                
         self.imgLabel = Tkinter.Label(self.root, image = self.img)
@@ -92,7 +93,9 @@ class gui():
         self.makeDesicionState()
         
     def uploadPicture(self):
-        copyfile(self.photoPath, self.uploadDir + self.getPhotoName())
+        photoName = self.getPhotoName()
+        copyfile(self.photoPath, self.uploadPrivDir + "Priv-" + photoName)
+        copyfile(self.photoPathPubl, self.uploadDir + photoName)
         self.takePhotoState()
 
     def delPicture(self):
