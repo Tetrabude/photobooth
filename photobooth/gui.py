@@ -40,7 +40,7 @@ class gui():
     def loadPeter(self):
         peter = Image.open("peter.jpg")
         self.smallPeter = self.resizeImage(peter)
-        self.smallPeterLabel = Tkinter.Label(self.root, image=self.smallPeter, font=("Roboto-Regular.ttf",500), foreground="red", text="", compound=Tkinter.CENTER)
+        self.smallPeterLabel = Tkinter.Label(self.root, image=self.smallPeter, font=("Roboto-Regular.ttf",300), foreground="red", text="", compound=Tkinter.CENTER)
         self.smallPeterLabel.place(x=5,y=5)
         
     def loadImage(self):
