@@ -13,7 +13,7 @@ class gui():
         self.uploadDir = uploadDir
         self.uploadPrivDir = uploadPrivDir
         self.root = Tkinter.Tk()
-        #self.root.overrideredirect(True)
+        self.root.overrideredirect(True)
         print('Gui initialized')
 
         self.w, self.h = self.root.winfo_screenwidth(), self.root.winfo_screenheight()
