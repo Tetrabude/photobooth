@@ -16,8 +16,8 @@ class gui():
         #self.root.overrideredirect(True)
         print('Gui initialized')
 
-        #self.w, self.h = self.root.winfo_screenwidth()-25, self.root.winfo_screenheight()-25
-        self.w, self.h = 1280, 1024 #1024, 768 #800, 600#
+        self.w, self.h = self.root.winfo_screenwidth()-25, self.root.winfo_screenheight()-25
+        #self.w, self.h = 1280, 1024 #1024, 768 #800, 600#
         self.root.geometry("%dx%d+0+0" % (self.w, self.h))
         
 
@@ -160,7 +160,7 @@ class gui():
         
         font = ImageFont.truetype("Roboto-Regular.ttf",60)
         draw = ImageDraw.Draw(originalImg)
-        draw.text((20 , originalImgHeight - 100),"#germanphotobooth",(255,255,255),font=font)
+        draw.text((20 , originalImgHeight - 100),"#wsj2015de",(255,255,255),font=font)
         draw = ImageDraw.Draw(originalImg)
         
     def resizeImage(self, originalImg):
