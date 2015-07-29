@@ -16,7 +16,7 @@ class gui():
         self.root.overrideredirect(True)
         print('Gui initialized')
 
-        self.w, self.h = self.root.winfo_screenwidth()-25, self.root.winfo_screenheight()-25
+        self.w, self.h = self.root.winfo_screenwidth(), self.root.winfo_screenheight()
         #self.w, self.h = 1280, 1024 #1024, 768 #800, 600#
         self.root.geometry("%dx%d+0+0" % (self.w, self.h))
         
