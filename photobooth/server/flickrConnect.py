@@ -42,7 +42,7 @@ class flickrConnect():
         try:
             self.checkAuthentication()
             print('Upload Photo')
-            resp = self.flickr.upload(filename=filename, is_public=is_public, tags='''germanphotobooth "wsj2015"''')
+            resp = self.flickr.upload(filename=filename, is_public=is_public, tags='''germanphotobooth "wsj2015" "wsj2015de"''')
             return resp
             
         except Exception as e:
